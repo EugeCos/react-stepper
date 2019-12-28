@@ -1,26 +1,60 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./App.scss";
+import Stepper from "./stepper/Stepper";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import React, { Component } from "react";
+
+export default class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      currentStep: 1
+    };
+  }
+
+  handleClick(clickType) {
+    const { currentStep } = this.state;
+    let newStep = currentStep;
+    clickType === "next" ? newStep++ : newStep--;
+
+    if (newStep > 0 && newStep <= 5) {
+      this.setState({
+        currentStep: newStep
+      });
+    }
+  }
+
+  render() {
+    const { currentStep } = this.state;
+    const stepsArray = [
+      "Create your account",
+      "Add personal info",
+      "Add payment details",
+      "Complete registration",
+      "Registration complete"
+    ];
+    return (
+      <>
+        <div className="stepper-container-vertical">
+          <Stepper
+            direction="vertical"
+            currentStepNumber={currentStep - 1}
+            steps={stepsArray}
+          />
+        </div>
+
+        <div className="stepper-container-horizontal">
+          <Stepper
+            direction="horizontal"
+            currentStepNumber={currentStep - 1}
+            steps={stepsArray}
+          />
+        </div>
+
+        <div className="buttons-container">
+          <button onClick={() => this.handleClick()}>Previous</button>
+          <button onClick={() => this.handleClick("next")}>Next</button>
+        </div>
+      </>
+    );
+  }
 }
-
-export default App;
