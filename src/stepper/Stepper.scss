@@ -79,8 +79,10 @@
 }
 
 .step-number-selected {
-    background: purple;
+    // background: purple;
+    border: 1px solid #bdbdbd;
     color: #fff;
+
 }
 
 .step-number-disabled {

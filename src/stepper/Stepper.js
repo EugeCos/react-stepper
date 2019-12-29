@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import "./Stepper.scss";
 
 export default class Stepper extends Component {
@@ -86,7 +87,7 @@ export default class Stepper extends Component {
   }
 
   render() {
-    const { direction } = this.props;
+    const { direction, stepColor } = this.props;
     const { steps } = this.state;
     const stepsJSX = steps.map((step, index) => {
       return (
@@ -95,6 +96,7 @@ export default class Stepper extends Component {
             className={`step-number ${
               step.selected ? "step-number-selected" : "step-number-disabled"
             }`}
+            style={{ background: `${step.selected ? stepColor : "none"}` }}
           >
             {step.completed ? <span>&#10003;</span> : index + 1}
           </div>
@@ -114,3 +116,10 @@ export default class Stepper extends Component {
     return <div className={`stepper-wrapper-${direction}`}>{stepsJSX}</div>;
   }
 }
+
+Stepper.propTypes = {
+  direction: PropTypes.string.isRequired,
+  currentStepNumber: PropTypes.number.isRequired,
+  steps: PropTypes.array.isRequired,
+  stepColor: PropTypes.string.isRequired
+};

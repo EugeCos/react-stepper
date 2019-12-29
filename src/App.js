@@ -1,6 +1,5 @@
 import "./App.scss";
 import Stepper from "./stepper/Stepper";
-
 import React, { Component } from "react";
 
 export default class App extends Component {
@@ -25,13 +24,7 @@ export default class App extends Component {
 
   render() {
     const { currentStep } = this.state;
-    const stepsArray = [
-      "Create your account",
-      "Add personal info",
-      "Add payment details",
-      "Complete registration",
-      "Registration complete"
-    ];
+
     return (
       <>
         <div className="stepper-container-vertical">
@@ -39,6 +32,7 @@ export default class App extends Component {
             direction="vertical"
             currentStepNumber={currentStep - 1}
             steps={stepsArray}
+            stepColor="#ee5253"
           />
         </div>
 
@@ -47,6 +41,7 @@ export default class App extends Component {
             direction="horizontal"
             currentStepNumber={currentStep - 1}
             steps={stepsArray}
+            stepColor="purple"
           />
         </div>
 
@@ -58,3 +53,11 @@ export default class App extends Component {
     );
   }
 }
+
+const stepsArray = [
+  // "Create your account",
+  "Add personal info",
+  "Add payment details",
+  "Complete registration",
+  "Registration complete"
+];
